@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Projek PPKn - Pelanggaran Membuang Sampah Sembarangan</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#07111f;
+    color:white;
+    overflow:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    background:#00bcd4;
+    opacity:.10;
+    filter:blur(120px);
+    border-radius:50%;
+    top:-180px;
+    left:-150px;
+    pointer-events:none;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    background:#2979ff;
+    opacity:.10;
+    filter:blur(120px);
+    border-radius:50%;
+    bottom:-200px;
+    right:-150px;
+    pointer-events:none;
+}
+
+.presentation{
+    width:100vw;
+    height:100vh;
+    position:relative;
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+    display:none;
+    padding:55px 8% 90px;
+    align-items:center;
+    justify-content:center;
+    z-index:1;
+}
+
+.slide.active{
+    display:flex;
+    animation:slideIn .5s ease;
+}
+
+@keyframes slideIn{
+    from{
+        opacity:0;
+        transform:translateX(35px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+.content{
+    width:100%;
+    max-width:1150px;
+}
+
+.badge{
+    display:inline-block;
+    padding:9px 16px;
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.07);
+    border-radius:30px;
+    margin-bottom:18px;
+    font-size:13px;
+    color:#80deea;
+}
+
+h1{
+    font-size:clamp(40px,6vw,75px);
+    line-height:1.04;
+    margin-bottom:20px;
+}
+
+h2{
+    font-size:clamp(32px,5vw,55px);
+    margin-bottom:22px;
+}
+
+h3{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+p{
+    font-size:17px;
+    line-height:1.65;
+    color:#cbd5e1;
+}
+
+.highlight{
+    color:#4dd0e1;
+}
+
+.subtitle{
+    max-width:760px;
+    font-size:20px;
+}
+
+/* COVER */
+
+.cover{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:45px;
+    align-items:center;
+}
+
+.cover-text{
+    animation:coverText .8s ease;
+}
+
+@keyframes coverText{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.cover-line{
+    width:65px;
+    height:4px;
+    background:#4dd0e1;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.cover-text h1{
+    max-width:700px;
+}
+
+.cover-text .highlight{
+    display:block;
+}
+
+.project-info{
+    margin-top:23px;
+    padding:15px 18px;
+    border-left:3px solid #4dd0e1;
+    background:rgba(255,255,255,.05);
+    border-radius:10px;
+}
+
+.project-info strong{
+    display:block;
+    color:#4dd0e1;
+    margin-bottom:5px;
+}
+
+.project-info span{
+    color:#94a3b8;
+    font-size:13px;
+}
+
+/* COVER FOTO */
+
+.cover-photo{
+    display:flex;
+    justify-content:center;
+}
+
+.photo-frame{
+    position:relative;
+    width:100%;
+    max-width:430px;
+    height:390px;
+    border-radius:30px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.2);
+    box-shadow:0 25px 70px rgba(0,0,0,.45);
+}
+
+.photo-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s;
+}
+
+.photo-frame:hover img{
+    transform:scale(1.08);
+}
+
+.photo-frame::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.75),
+        transparent 55%
+    );
+}
+
+.photo-label{
+    position:absolute;
+    bottom:18px;
+    left:18px;
+    right:18px;
+    z-index:2;
+    padding:13px 15px;
+    border-radius:14px;
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(10px);
+    color:white;
+    font-size:13px;
+}
+
+/* MEMBER */
+
+.members-title{
+    margin-top:23px;
+    margin-bottom:10px;
+    font-size:12px;
+    color:#80deea;
+    letter-spacing:1px;
+    font-weight:bold;
+}
+
+.members{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+}
+
+.member-card{
+    padding:12px;
+    border-radius:13px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.1);
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    transition:.25s;
+}
+
+.member-card:hover{
+    transform:translateY(-4px);
+    border-color:#4dd0e1;
+}
+
+.member-card strong{
+    color:#4dd0e1;
+    font-size:11px;
+}
+
+.member-card span{
+    font-size:12px;
+    font-weight:bold;
+}
+
+.member-card small{
+    color:#94a3b8;
+    font-size:10px;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.grid.three{
+    grid-template-columns:repeat(3,1fr);
+}
+
+.card{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:20px;
+    padding:24px;
+    backdrop-filter:blur(12px);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    border-color:#4dd0e1;
+    background:rgba(255,255,255,.11);
+}
+
+.icon{
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+.number{
+    font-size:45px;
+    font-weight:bold;
+    color:#4dd0e1;
+    margin-bottom:7px;
+}
+
+/* TWO COLUMN */
+
+.two-column{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    align-items:center;
+}
+
+/* FOTO */
+
+.image-card{
+    width:100%;
+    height:310px;
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:0 15px 50px rgba(0,0,0,.35);
+    background:rgba(255,255,255,.05);
+}
+
+.image-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.image-card:hover img{
+    transform:scale(1.06);
+}
+
+.photo-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.photo-grid .image-card{
+    height:250px;
+}
+
+/* LIST */
+
+.list{
+    margin-top:20px;
+}
+
+.list div{
+    padding:14px 17px;
+    margin-bottom:10px;
+    background:rgba(255,255,255,.06);
+    border-left:4px solid #4dd0e1;
+    border-radius:10px;
+    color:#dbeafe;
+}
+
+/* LAW */
+
+.law{
+    border-left:5px solid #4dd0e1;
+    padding:23px;
+    background:rgba(255,255,255,.06);
+    border-radius:15px;
+    margin-top:18px;
+}
+
+/* QUOTE */
+
+.quote{
+    font-size:25px;
+    line-height:1.5;
+    padding:30px;
+    border-radius:22px;
+    background:rgba(77,208,225,.08);
+    border:1px solid rgba(77,208,225,.25);
+    text-align:center;
+}
+
+.small{
+    font-size:14px;
+    color:#94a3b8;
+}
+
+/* CONTROLS */
+
+.controls{
+    position:fixed;
+    bottom:22px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    z-index:20;
+}
+
+button{
+    border:none;
+    padding:12px 20px;
+    border-radius:30px;
+    background:#102a43;
+    color:white;
+    cursor:pointer;
+    font-size:14px;
+    border:1px solid rgba(255,255,255,.15);
+    transition:.25s;
+}
+
+button:hover{
+    background:#164e63;
+    transform:translateY(-2px);
+}
+
+.counter{
+    padding:9px 15px;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+    color:#94a3b8;
+}
+
+/* PROGRESS */
+
+.progress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:4px;
+    width:0%;
+    background:#4dd0e1;
+    z-index:30;
+    transition:.4s;
+}
+
+/* MOBILE */
+
+@media(max-width:750px){
+
+    .slide{
+        padding:35px 6% 90px;
+    }
+
+    .cover{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .cover-photo{
+        display:none;
+    }
+
+    .cover-text h1{
+        font-size:38px;
+    }
+
+    .grid,
+    .grid.three,
+    .two-column{
+        grid-template-columns:1fr;
+    }
+
+    h2{
+        font-size:32px;
+    }
+
+    p{
+        font-size:15px;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .image-card{
+        height:190px;
+    }
+
+    .photo-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .photo-grid .image-card{
+        height:160px;
+    }
+
+    .members{
+        grid-template-columns:repeat(2,1fr);
+        max-height:145px;
+        overflow:auto;
+    }
+
+    .members-title{
+        margin-top:15px;
+    }
+
+    .member-card{
+        padding:9px;
+    }
+
+    .member-card span{
+        font-size:11px;
+    }
+
+    .quote{
+        font-size:19px;
+        padding:22px;
+    }
+
+    .controls{
+        bottom:12px;
+    }
+
+    button{
+        padding:9px 13px;
+    }
+}
+
+@media(max-width:400px){
+
+    .cover-text h1{
+        font-size:32px;
+    }
+
+    .subtitle{
+        font-size:15px;
+    }
+
+    .members{
+        max-height:125px;
+    }
+
+    .member-card{
+        font-size:10px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="presentation">
+
+<!-- =================================================
+SLIDE 1
+================================================= -->
+
+<section class="slide active">
+
+<div class="content">
+
+<div class="cover">
+
+<div class="cover-text">
+
+<span class="badge">
+PROJEK PENDIDIKAN PANCASILA / PPKN
+</span>
+
+<div class="cover-line"></div>
+
+<h1>
+Pelanggaran
+
+<span class="highlight">
+Membuang Sampah
+</span>
+
+Sembarangan
+</h1>
+
+<p class="subtitle">
+Analisis permasalahan membuang sampah sembarangan
+di lingkungan masyarakat serta dampak dan solusi
+yang dapat dilakukan bersama.
+</p>
+
+<div class="project-info">
+
+<strong>TUGAS KELOMPOK</strong>
+
+<span>
+Pelanggaran dan Tanggung Jawab di Lingkungan Masyarakat
+</span>
+
+</div>
+
+</div>
+
+<div class="cover-photo">
+
+<div class="photo-frame">
+
+<img src="1000608172.jpg"
+alt="Foto dokumentasi kelompok">
+
+<div class="photo-label">
+⚠️ Peduli lingkungan dimulai dari diri sendiri
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="members-title">
+👥 ANGGOTA KELOMPOK
+</div>
+
+<div class="members">
+
+<div class="member-card">
+<strong>01</strong>
+<span>Fikri Safendi</span>
+<small>NIM 261090100360</small>
+</div>
+
+<div class="member-card">
+<strong>02</strong>
+<span>Ade Hartomo Putra</span>
+<small>NIM 261090100394</small>
+</div>
+
+<div class="member-card">
+<strong>03</strong>
+<span>Risky Dafa Alkhalifi</span>
+<small>NIM 261090100320</small>
+</div>
+
+<div class="member-card">
+<strong>04</strong>
+<span>Radhi Rohman</span>
+<small>NIM 261090100262</small>
+</div>
+
+<div class="member-card">
+<strong>05</strong>
+<span>Cindy Yulia Rahman</span>
+<small>NIM 261090100366</small>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+SLIDE 2 — PEMBAGIAN TUGAS
+================================================= -->
+
+<section class="slide">
+
+<div class="content">
+
+<span class="badge">
+PEMBAGIAN TUGAS KELOMPOK
+</span>
+
+<h2>
+Tugas Masing-Masing Anggota
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>👤 Fikri Safendi</h3>
+
+<p>
+<strong style="color:#4dd0e1;">
+NIM 261090100360
+</strong>
+</p>
+
+<p style="margin-top:8px;">
+Ketua kelompok, menyusun materi,
+membuat dan mengedit website,
+mengatur pembagian tugas, serta
+mengoordinasikan anggota kelompok.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>👤 Ade Hartomo Putra</h3>
+
+<p>
+<strong style="color:#4dd0e1;">
+NIM 261090100394
+</strong>
+</p>
+
+<p style="margin-top:8px;">
+Mencari dan menyusun materi mengenai
+pengertian, penyebab, dan contoh
+membuang sampah sembarangan.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>👤 Risky Dafa Alkhalifi</h3>
+
+<p>
+<strong style="color:#4dd0e1;">
+NIM 261090100320
+</strong>
+</p>
+
+<p style="margin-top:8px;">
+Mencari materi tentang dampak
+membuang sampah sembarangan terhadap
+lingkungan, kesehatan, dan masyarakat.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>👤 Radhi Rohman</h3>
+
+<p>
+<strong style="color:#4dd0e1;">
+NIM 261090100262
+</strong>
+</p>
+
+<p style="margin-top:8px;">
+Mencari aturan, undang-undang,
+dan peraturan yang berkaitan dengan
+pengelolaan sampah.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>👤 Cindy Yulia Rahman</h3>
+
+<p>
+<strong style="color:#4dd0e1;">
+NIM 261090100366
+</strong>
+</p>
+
+<p style="margin-top:8px;">
+Mencari dokumentasi atau foto,
+menyusun bagian solusi, dan membantu
+persiapan presentasi.
+</p>
+
+</div>
+
+</div>
+
+<div class="quote" style="margin-top:25px;">
+
+🤝 Semua anggota bekerja sama dalam
+diskusi, penyusunan materi,
+dokumentasi, dan presentasi.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+SLIDE 3 — LATAR BELAKANG
+================================================= -->
+
+<section class="slide">
+
+<div class="content">
+
+<span class="badge">
+01 — LATAR BELAKANG
+</span>
+
+<h2>
+Mengapa masalah ini penting?
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="icon">🗑️</div>
+
+<h3>Kebiasaan Masyarakat</h3>
+
+<p>
+Masih ada sebagian masyarakat yang membuang
+sampah bukan pada tempat yang telah disediakan.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon">🌊</div>
+
+<h3>Lingkungan Tercemar</h3>
+
+<p>
+Sampah yang menumpuk dapat mencemari lingkungan
+dan mengganggu kenyamanan masyarakat.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon">🦟</div>
+
+<h3>Risiko Kesehatan</h3>
+
+<p>
+Tumpukan sampah dapat menjadi tempat berkembang
+biaknya berbagai sumber penyakit.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon">🏘️</div>
+
+<h3>Tanggung Jawab Bersama</h3>
+
+<p>
+Menjaga kebersihan bukan hanya tugas petugas
+kebersihan, tetapi juga tanggung jawab masyarakat.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+SLIDE 4 — PENGERTIAN
+================================================= -->
+
+<section class="slide">
+
+<div class="content">
+
+<span class="badge">
+02 — PENGERTIAN
+</span>
+
+<h2>
+Apa yang termasuk pelanggaran?
+</h2>
+
+<div class="two-column">
+
+<div>
+
+<p>
+Membuang sampah sembarangan adalah tindakan
+membuang sampah di tempat yang tidak seharusnya,
+seperti jalan, selokan, sungai, lahan kosong,
+atau fasilitas umum.
+</p>
+
+<div class="list">
+
+<div>❌ Membuang sampah ke sungai</div>
+
+<div>❌ Membuang sampah ke selokan</div>
+
+<div>❌ Membuang sampah di jalan</div>
+
+<div>❌ Membuang sampah di fasilitas umum</div>
+
+</div>
+
+</div>
+
+<div class="image-card">
+
+<img
+src="1000608806.jpg"
+alt="Dokumentasi sampah"
+>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+SLIDE 5 — CONTOH
+================================================= -->
+
+<section class="slide">
+
+<div class="content">
+
+<span class="badge">
+03 — CONTOH KEJADIAN
+</span>
+
+<h2>
+Contoh di lingkungan masyarakat
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="number">01</div>
+
+<h3>Sampah di Selokan</h3>
+
+<p>
+Warga membuang plastik dan sampah rumah tangga
+ke selokan sehingga aliran air terganggu.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="number">02</div>
+
+<h3>Sampah di Sungai</h3>
+
+<p>
+Sampah yang dibuang ke sungai dapat terbawa arus
+dan mencemari perairan.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="number">03</div>
+
+<h3>Sampah di Jalan</h3>
+
+<p>
+Sampah yang berserakan di jalan mengurangi
+kebersihan dan kenyamanan.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="number">04</div>
+
+<h3>Lahan Kosong</h3>
+
+<p>
+Lahan kosong terkadang dijadikan tempat
+pembuangan sampah.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+SLIDE 6 — DAMPAK
+================================================= -->
+
+<section class="slide">
+
+<div class="content">
+
+<span class="badge">
+04 — DAMPAK
+</span>
+
+<h2>
+Dampak membuang sampah sembarangan
+</h2>
+
+<div class="grid three">
+
+<div class="card">
+
+<div class="icon">🌧️</div>
+
+<h3>Banjir</h3>
+
+<p>
+Sampah yang menyumbat selokan dapat menghambat
+aliran air.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon">🦠</div>
+
+<h3>Kesehatan</h3>
+
+<p>
+Tumpukan sampah dapat menjadi tempat berkembangnya
+berbagai sumber penyakit.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon">🌱</div>
+
+<h3>Lingkungan</h3>
+
+<p>
+Sampah dapat mencemari tanah, air,
+dan mengganggu lingkungan sekitar.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon">👃</div>
+
+<h3>Bau Tidak Sedap</h3>
+
+<p>
+Sampah yang menumpuk dapat menimbulkan
+bau yang mengganggu.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon">🏙️</div>
+
+<h3>Keindahan</h3>
+
+<p>
+Lingkungan menjadi terlihat kotor dan tidak nyaman.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon">💰</div>
+
+<h3>Biaya</h3>
+
+<p>
+Pembersihan sampah membutuhkan tenaga,
+waktu, dan biaya.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+SLIDE 7 — DOKUMENTASI
+================================================= -->
+
+<section class="slide">
+
+<div class="content">
+
+<span class="badge">
+05 — DOKUMENTASI
+</span>
+
+<h2>
+Dokumentasi Kegiatan
+</h2>
+
+<div class="photo-grid">
+
+<div class="image-card">
+
+<img
+src="1000608172.jpg"
+alt="Dokumentasi foto 1"
+>
+
+</div>
+
+<div class="image-card">
+
+<img
+src="1000608173.jpg"
+alt="Dokumentasi foto 2"
+>
+
+</div>
+
+<div class="image-card">
+
+<img
+src="1000608174.jpg"
+alt="Dokumentasi foto 3"
+>
+
+</div>
+
+<div class="image-card">
+
+<img
+src="1000608806.jpg"
+alt="Dokumentasi foto 4"
+>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+SLIDE 8 — HUKUM
+================================================= -->
+
+<section class="slide">
+
+<div class="content">
+
+<span class="badge">
+06 — ATURAN / HUKUM
+</span>
+
+<h2>
+Aturan yang berkaitan
+</h2>
+
+<div class="law">
+
+<h3>
+UU Nomor 18 Tahun 2008
+</h3>
+
+<p>
+Undang-Undang Nomor 18 Tahun 2008 tentang
+Pengelolaan Sampah mengatur pengelolaan sampah
+dan larangan membuang sampah tidak pada tempat
+yang telah ditentukan dan disediakan.
+</p>
+
+</div>
+
+<div class="law">
+
+<h3>
+Peraturan Daerah</h3>
+
+<p>
+Pemerintah daerah juga dapat memiliki aturan
+mengenai kebersihan dan pengelolaan sampah.
+Ketentuan sanksinya dapat berbeda sesuai daerah.
+</p>
+
+</div>
+
+<p class="small">
+Catatan: aturan daerah dapat ditambahkan sesuai
+lokasi yang dibahas.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+SLIDE 9 — ANALISIS
+================================================= -->
+
+<section class="slide">
+
+<div class="content">
+
+<span class="badge">
+07 — ANALISIS MASALAH
+</span>
+
+<h2>
+Mengapa hal ini bisa terjadi?
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>🔎 Penyebab</h3>
+
+<p>
+Kurangnya kesadaran, kebiasaan buruk,
+fasilitas tempat sampah yang kurang,
+dan kurangnya kepedulian terhadap lingkungan.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>⚠️ Akibat</h3>
+
+<p>
+Lingkungan menjadi kotor, saluran air tersumbat,
+muncul bau tidak sedap, dan dapat mengganggu
+kesehatan.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>👥 Pihak yang Terlibat</h3>
+
+<p>
+Masyarakat, pemerintah daerah, sekolah,
+pengelola lingkungan, dan petugas kebersihan.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>💡 Yang Bisa Dilakukan</h3>
+
+<p>
+Meningkatkan kesadaran, menyediakan fasilitas,
+melakukan edukasi, dan menaati aturan.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+SLIDE 10 — SOLUSI
+================================================= -->
+
+<section class="slide">
+
+<div class="content">
+
+<span class="badge">
+08 — SOLUSI
+</span>
+
+<h2>
+Apa yang bisa kita lakukan?
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="icon">🗑️</div>
+
+<h3>Buang Sampah pada Tempatnya</h3>
+
+<p>
+Biasakan membuang sampah pada tempat
+yang telah disediakan.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon">♻️</div>
+
+<h3>Kurangi Sampah</h3>
+
+<p>
+Kurangi penggunaan barang sekali pakai
+dan manfaatkan kembali barang yang masih
+bisa digunakan.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon">🤝</div>
+
+<h3>Gotong Royong</h3>
+
+<p>
+Melakukan kegiatan membersihkan lingkungan
+bersama masyarakat.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon">📢</div>
+
+<h3>Edukasi</h3>
+
+<p>
+Mengajak keluarga, teman, dan masyarakat
+untuk peduli terhadap kebersihan.
+</p>
+
+</div>
+
+</div>
+
+<div class="quote" style="margin-top:22px;">
+
+"Menjaga kebersihan lingkungan dimulai dari
+kebiasaan kecil yang dilakukan bersama."
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+SLIDE 11 — AKSI BERSIH
+================================================= -->
+
+<section class="slide">
+
+<div class="content">
+
+<span class="badge">
+09 — AKSI NYATA
+</span>
+
+<h2>
+Bersama menjaga lingkungan
+</h2>
+
+<div class="two-column">
+
+<div>
+
+<h3>
+Gotong royong membersihkan lingkungan
+</h3>
+
+<p>
+Kegiatan membersihkan lingkungan dapat dilakukan
+secara bersama-sama. Selain membuat lingkungan
+lebih bersih, kegiatan ini juga dapat meningkatkan
+kepedulian dan kerja sama masyarakat.
+</p>
+
+<br>
+
+<div class="list">
+
+<div>🧹 Membersihkan area sekitar</div>
+
+<div>♻️ Memilah sampah</div>
+
+<div>🤝 Bekerja sama dengan masyarakat</div>
+
+<div>📢 Mengajak masyarakat menjaga kebersihan</div>
+
+</div>
+
+</div>
+
+<div class="image-card">
+
+<img
+src="1000608174.jpg"
+alt="Aksi peduli lingkungan"
+>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+SLIDE 12 — KESIMPULAN
+================================================= -->
+
+<section class="slide">
+
+<div class="content">
+
+<span class="badge">
+10 — KESIMPULAN
+</span>
+
+<h2>
+Kesimpulan
+</h2>
+
+<div class="quote">
+
+Membuang sampah sembarangan merupakan perilaku
+yang dapat merugikan lingkungan dan masyarakat.
+
+<br><br>
+
+Menjaga kebersihan adalah tanggung jawab bersama.
+Dengan membuang sampah pada tempatnya,
+mengurangi sampah, dan menaati aturan, kita dapat
+menciptakan lingkungan yang lebih bersih dan nyaman.
+
+</div>
+
+<div style="
+text-align:center;
+margin-top:35px;
+">
+
+<h3 class="highlight">
+TERIMA KASIH 🙏
+</h3>
+
+<p>
+Ada pertanyaan?
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- =================================================
+CONTROLS
+================================================= -->
+
+<div class="controls">
+
+<button onclick="prevSlide()">
+← Kembali
+</button>
+
+<div class="counter">
+<span id="current">1</span> / 12
+</div>
+
+<button onclick="nextSlide()">
+Lanjut →
+</button>
+
+</div>
+
+
+<script>
+
+let currentSlide = 0;
+
+const slides =
+document.querySelectorAll(".slide");
+
+const totalSlides =
+slides.length;
+
+const counter =
+document.getElementById("current");
+
+const progress =
+document.getElementById("progress");
+
+
+function showSlide(index){
+
+    if(index < 0){
+        index = totalSlides - 1;
+    }
+
+    if(index >= totalSlides){
+        index = 0;
+    }
+
+    slides.forEach(function(slide){
+        slide.classList.remove("active");
+    });
+
+    slides[index].classList.add("active");
+
+    currentSlide = index;
+
+    counter.textContent = index + 1;
+
+    const progressWidth =
+        ((index + 1) / totalSlides) * 100;
+
+    progress.style.width =
+        progressWidth + "%";
+}
+
+
+function nextSlide(){
+    showSlide(currentSlide + 1);
+}
+
+
+function prevSlide(){
+    showSlide(currentSlide - 1);
+}
+
+
+/* KEYBOARD */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "ArrowRight" ||
+            event.key === " "
+        ){
+
+            event.preventDefault();
+
+            nextSlide();
+        }
+
+        if(
+            event.key === "ArrowLeft"
+        ){
+
+            event.preventDefault();
+
+            prevSlide();
+        }
+
+    }
+);
+
+
+/* SWIPE HP */
+
+let startX = 0;
+
+document.addEventListener(
+    "touchstart",
+    function(event){
+
+        startX =
+            event.touches[0].clientX;
+
+    }
+);
+
+document.addEventListener(
+    "touchend",
+    function(event){
+
+        let endX =
+            event.changedTouches[0].clientX;
+
+        if(startX - endX > 60){
+            nextSlide();
+        }
+
+        if(endX - startX > 60){
+            prevSlide();
+        }
+
+    }
+);
+
+
+/* START */
+
+showSlide(0);
+
+</script>
+
+</body>
+</html>
